@@ -1,0 +1,18 @@
+Generic single-database configuration with an async dbapi.
+
+Использование миграций:
+
+# Создание миграции
+alembic revision --autogenerate -m "описание изменений"
+
+# Применение миграций
+alembic upgrade head
+
+# Откат миграций
+alembic downgrade -1
+
+# Просмотр текущей версии
+alembic current
+
+# Просмотр истории миграций
+alembic history --verbose

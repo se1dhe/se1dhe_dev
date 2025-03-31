@@ -1,0 +1,46 @@
+{
+  "name": "se1dhe_dev",
+  "version": "0.1.0",
+  "private": true,
+  "author": "@se1dhe",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+  },
+  "dependencies": {
+    "vue": "^3.3.8",
+    "vue-router": "^4.2.5",
+    "pinia": "^2.1.7",
+    "axios": "^1.6.2",
+    "jwt-decode": "^4.0.0",
+    "vue-i18n": "^9.7.0",
+    "socket.io-client": "^4.7.2",
+    "vee-validate": "^4.11.8",
+    "yup": "^1.3.2",
+    "vue-markdown-render": "^2.1.0",
+    "highlight.js": "^11.9.0",
+    "chart.js": "^4.4.0",
+    "vue-chartjs": "^5.2.0",
+    "vue-toast-notification": "^3.1.1",
+    "dayjs": "^1.11.10",
+    "lodash": "^4.17.21",
+    "@vueuse/core": "^10.6.1",
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/free-brands-svg-icons": "^6.4.2",
+    "@fortawesome/vue-fontawesome": "^3.0.5",
+    "tailwindcss": "^3.3.5",
+    "postcss": "^8.4.31",
+    "autoprefixer": "^10.4.16"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.5.0",
+    "vite": "^5.0.0",
+    "eslint": "^8.54.0",
+    "eslint-plugin-vue": "^9.18.1",
+    "sass": "^1.69.5",
+    "sass-loader": "^13.3.2"
+  }
+}
