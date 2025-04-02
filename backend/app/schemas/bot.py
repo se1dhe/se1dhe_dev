@@ -1,72 +1,112 @@
-from typing import Optional, List, Any
-from pydantic import BaseModel, validator
+from typing import Optional, List, Dict, Any, Union, ClassVar
+from pydantic import BaseModel, validator, HttpUrl, Field
 from datetime import datetime
+from decimal import Decimal
+
+from app.schemas.user import User
+from app.schemas.category import Category
+from app.schemas.base import BotBase
 
 
-# Общие свойства
-class BotBase(BaseModel):
-    name: Optional[str] = None
-    slug: Optional[str] = None
-    short_description: Optional[str] = None
-    full_description: Optional[str] = None
-    readme_md: Optional[str] = None
-    price: Optional[float] = None
-    discount_percent: Optional[float] = 0
-    category_id: Optional[int] = None
-    preview_image_url: Optional[str] = None
-    images: Optional[List[str]] = None
-    videos: Optional[List[str]] = None
-    demo_url: Optional[str] = None
-    features: Optional[List[str]] = None
-    is_active: Optional[bool] = True
-    is_featured: Optional[bool] = False
-
-
-# Свойства для создания через API
-class BotCreate(BotBase):
+class CategoryBase(BaseModel):
+    """Base Category schema with common attributes."""
     name: str
+    description: Optional[str] = None
     slug: str
-    short_description: str
-    price: float
-    category_id: int
-
-    @validator('slug')
-    def slug_alphanumeric_dash(cls, v):
-        import re
-        assert re.match(r'^[a-z0-9]+(-[a-z0-9]+)*$', v), 'Slug должен содержать только строчные буквы, цифры и дефисы'
-        return v
+    is_active: bool = True
+    discount_percentage: Optional[float] = 0
 
 
-# Свойства для обновления через API
-class BotUpdate(BotBase):
+class CategoryCreate(CategoryBase):
+    """Schema for category creation."""
     pass
 
 
-# Свойства для чтения из БД
-class BotInDBBase(BotBase):
+class CategoryUpdate(CategoryBase):
+    """Schema for updating category data."""
+    name: Optional[str] = None
+    description: Optional[str] = None
+    slug: Optional[str] = None
+    is_active: Optional[bool] = None
+    discount_percentage: Optional[float] = None
+
+
+class CategoryInDBBase(CategoryBase):
+    """Schema for category data retrieved from DB with read-only fields."""
     id: int
     created_at: datetime
     updated_at: Optional[datetime] = None
+    
+    class Config:
+        from_attributes = True
+
+
+class Category(CategoryInDBBase):
+    """API schema for category output."""
+    pass
+
+
+# Bot Schemas
+class BotCreate(BotBase):
+    pass
+
+
+class BotUpdate(BaseModel):
+    name: Optional[str] = None
+    description: Optional[str] = None
+    price: Optional[float] = None
+    category_id: Optional[int] = None
+    telegram_token: Optional[str] = None
+    telegram_username: Optional[str] = None
+    is_active: Optional[bool] = None
+    is_verified: Optional[bool] = None
+
+
+class BotInDBBase(BotBase):
+    id: int
+    created_at: datetime
+    updated_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
-# Дополнительные свойства для возврата через API
 class Bot(BotInDBBase):
     pass
 
 
-# Расширенная схема со всеми деталями
-class BotWithDetails(Bot):
-    category_name: Optional[str] = None
-    final_price: Optional[float] = None
-    subscriptions_count: Optional[int] = 0
+class BotWithCategory(Bot):
+    Category: ClassVar[type] = Category
+    category: Category
 
-    @validator('final_price', always=True)
-    def calculate_final_price(cls, v, values):
-        price = values.get('price', 0)
-        discount = values.get('discount_percent', 0)
-        if price is not None and discount is not None:
-            return price * (1 - discount / 100)
-        return price
+
+class BotWithDetails(Bot):
+    User: ClassVar[type] = User
+    Category: ClassVar[type] = Category
+    owner: User
+    category: Category
+
+
+class SubscriptionBase(BaseModel):
+    """Base schema for user-bot subscription."""
+    user_id: int
+    bot_id: int
+    expires_at: datetime
+
+
+class SubscriptionCreate(SubscriptionBase):
+    """Schema for creating a subscription."""
+    pass
+
+
+class SubscriptionUpdate(BaseModel):
+    """Schema for updating a subscription."""
+    expires_at: Optional[datetime] = None
+
+
+class Subscription(SubscriptionBase):
+    """API schema for subscription output."""
+    created_at: datetime
+    
+    class Config:
+        from_attributes = True 

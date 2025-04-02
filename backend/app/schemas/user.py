@@ -1,56 +1,60 @@
 from typing import Optional, List
-from pydantic import BaseModel, EmailStr, validator
+from pydantic import BaseModel
 from datetime import datetime
+
+from app.schemas.base import UserBase
+from app.schemas.subscription import Subscription
 
 
 # Общие свойства
 class UserBase(BaseModel):
-    email: Optional[EmailStr] = None
+    """Base User schema with common attributes."""
+    email: Optional[str] = None
     username: Optional[str] = None
+    telegram_id: Optional[int] = None
+    telegram_username: Optional[str] = None
+    full_name: Optional[str] = None
     is_active: Optional[bool] = True
     is_superuser: bool = False
-    full_name: Optional[str] = None
-    telegram_id: Optional[str] = None
 
 
-# Свойства для создания через API
 class UserCreate(UserBase):
-    email: EmailStr
-    username: str
+    """Schema for user creation with required fields."""
     password: str
 
-    @validator('username')
-    def username_alphanumeric(cls, v):
-        assert v.isalnum(), 'Username должен содержать только буквы и цифры'
-        return v
 
-
-# Свойства для обновления через API
-class UserUpdate(UserBase):
+class UserUpdate(BaseModel):
+    """Schema for updating user data."""
+    email: Optional[str] = None
+    username: Optional[str] = None
     password: Optional[str] = None
+    telegram_id: Optional[int] = None
+    telegram_username: Optional[str] = None
+    is_active: Optional[bool] = None
+    is_superuser: Optional[bool] = None
+    is_verified: Optional[bool] = None
 
 
-# Свойства для чтения из БД
 class UserInDBBase(UserBase):
+    """Schema for user data retrieved from DB with read-only fields."""
     id: int
     created_at: datetime
-    updated_at: Optional[datetime] = None
-
+    updated_at: datetime
+    
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
-# Дополнительные свойства для возврата через API
 class User(UserInDBBase):
+    """API schema for regular user output (no sensitive data)."""
     pass
 
 
-# Дополнительные свойства, хранящиеся в БД
 class UserInDB(UserInDBBase):
+    """DB schema for user with hashed password (not exposed in API)."""
     hashed_password: str
 
 
-# Схема для расширенной информации о пользователе
-class UserWithDetails(User):
-    subscriptions_count: Optional[int] = 0
-    orders_count: Optional[int] = 0
+class UserWithSubscriptions(User):
+    """API schema for user with their subscriptions."""
+    subscriptions: List[Subscription] = [] 

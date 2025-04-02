@@ -1,50 +1,69 @@
-from fastapi import FastAPI, Depends
-from fastapi.middleware.cors import CORSMiddleware
-from backend.app.core.config import settings
-from backend.app.api.api import api_router
-from backend.app.db.session import get_db
-from sqlalchemy.orm import Session
-from backend.app.core.websockets import websocket_router
-import logging
+import time
+from typing import List
 
-# Настройка логирования
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-)
-logger = logging.getLogger(__name__)
+from fastapi import FastAPI, Request, Depends
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+
+from app.api.api_v1.api import api_router
+from app.core.config import settings
+from app.db.session import SessionLocal
+from app.core.cache import init_cache
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
-    openapi_url=f"{settings.API_V1_STR}/openapi.json",
-    docs_url="/docs",
-    redoc_url="/redoc",
+    version=settings.VERSION,
+    openapi_url=f"{settings.API_V1_STR}/openapi.json"
 )
 
 # Настройка CORS
-if settings.BACKEND_CORS_ORIGINS:
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=[str(origin) for origin in settings.BACKEND_CORS_ORIGINS],
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[str(origin) for origin in settings.BACKEND_CORS_ORIGINS],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Middleware для логирования времени запроса
+@app.middleware("http")
+async def add_process_time_header(request: Request, call_next):
+    start_time = time.time()
+    response = await call_next(request)
+    process_time = time.time() - start_time
+    response.headers["X-Process-Time"] = str(process_time)
+    return response
+
+# Middleware для обработки исключений
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    return JSONResponse(
+        status_code=500,
+        content={"detail": f"Internal Server Error: {str(exc)}"},
     )
 
-# Подключение маршрутов API
+# Добавление API роутеров
 app.include_router(api_router, prefix=settings.API_V1_STR)
-app.include_router(websocket_router)
 
-@app.get("/")
-def root():
-    return {"message": f"Welcome to {settings.PROJECT_NAME} API"}
+@app.get("/", tags=["Health"])
+async def root():
+    """
+    Корневой эндпоинт для проверки работоспособности API.
+    """
+    return JSONResponse(
+        content={
+            "status": "ok",
+            "message": "API работает",
+            "version": settings.VERSION,
+            "docs_url": "/docs",
+            "redoc_url": "/redoc"
+        },
+        headers={"Content-Type": "application/json; charset=utf-8"}
+    )
 
-@app.get("/health")
-def health_check(db: Session = Depends(get_db)):
-    try:
-        # Проверка соединения с БД
-        db.execute("SELECT 1")
-        return {"status": "ok", "database": "connected"}
-    except Exception as e:
-        logger.error(f"Health check failed: {e}")
-        return {"status": "error", "database": str(e)}
+# Создаем тестовую БД при запуске в режиме разработки
+@app.on_event("startup")
+async def startup_event():
+    """Инициализация приложения при запуске"""
+    # Инициализация кэша Redis
+    await init_cache() 
