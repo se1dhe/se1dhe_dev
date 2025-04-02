@@ -1,0 +1,125 @@
+@use "sass:map";
+@use "variables" as *;
+
+// Breakpoints
+$breakpoints: (
+  'xs': 0,
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+  'xxl': 1400px
+);
+
+// Media query mixins
+@mixin media-up($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (min-width: map.get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "No value found for `#{$breakpoint}`. Please make sure it is defined in `$breakpoints` map.";
+  }
+}
+
+@mixin media-down($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (max-width: map.get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "No value found for `#{$breakpoint}`. Please make sure it is defined in `$breakpoints` map.";
+  }
+}
+
+@mixin media-between($lower, $upper) {
+  @if map.has-key($breakpoints, $lower) and map.has-key($breakpoints, $upper) {
+    @media (min-width: map.get($breakpoints, $lower)) and (max-width: map.get($breakpoints, $upper)) {
+      @content;
+    }
+  } @else {
+    @if not map.has-key($breakpoints, $lower) {
+      @warn "No value found for `#{$lower}`. Please make sure it is defined in `$breakpoints` map.";
+    }
+    @if not map.has-key($breakpoints, $upper) {
+      @warn "No value found for `#{$upper}`. Please make sure it is defined in `$breakpoints` map.";
+    }
+  }
+}
+
+@mixin media-only($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @if $breakpoint == "xs" {
+      @media (max-width: map.get($breakpoints, "sm") - 1) {
+        @content;
+      }
+    } @else if $breakpoint == "xl" {
+      @media (min-width: map.get($breakpoints, "xl")) {
+        @content;
+      }
+    } @else {
+      @media (min-width: map.get($breakpoints, $breakpoint)) and (max-width: map.get($breakpoints, next-breakpoint($breakpoint)) - 1) {
+        @content;
+      }
+    }
+  } @else {
+    @warn "No value found for `#{$breakpoint}`. Please make sure it is defined in `$breakpoints` map.";
+  }
+}
+
+// Responsive utilities
+.hide {
+  &-xs-down {
+    @include media-down('xs') {
+      display: none !important;
+    }
+  }
+  &-sm-down {
+    @include media-down('sm') {
+      display: none !important;
+    }
+  }
+  &-md-down {
+    @include media-down('md') {
+      display: none !important;
+    }
+  }
+  &-lg-down {
+    @include media-down('lg') {
+      display: none !important;
+    }
+  }
+  &-xl-down {
+    @include media-down('xl') {
+      display: none !important;
+    }
+  }
+}
+
+.show {
+  &-xs-up {
+    @include media-up('xs') {
+      display: block !important;
+    }
+  }
+  &-sm-up {
+    @include media-up('sm') {
+      display: block !important;
+    }
+  }
+  &-md-up {
+    @include media-up('md') {
+      display: block !important;
+    }
+  }
+  &-lg-up {
+    @include media-up('lg') {
+      display: block !important;
+    }
+  }
+  &-xl-up {
+    @include media-up('xl') {
+      display: block !important;
+    }
+  }
+} 

@@ -1,0 +1,90 @@
+// Spacing
+.m {
+  &-0 { margin: 0; }
+  &-1 { margin: var(--spacing-xs); }
+  &-2 { margin: var(--spacing-sm); }
+  &-3 { margin: var(--spacing-md); }
+  &-4 { margin: var(--spacing-lg); }
+  &-5 { margin: var(--spacing-2xl); }
+}
+
+.p {
+  &-0 { padding: 0; }
+  &-1 { padding: var(--spacing-xs); }
+  &-2 { padding: var(--spacing-sm); }
+  &-3 { padding: var(--spacing-md); }
+  &-4 { padding: var(--spacing-lg); }
+  &-5 { padding: var(--spacing-2xl); }
+}
+
+// Display
+.d {
+  &-none { display: none; }
+  &-block { display: block; }
+  &-inline { display: inline; }
+  &-inline-block { display: inline-block; }
+  &-flex { display: flex; }
+  &-grid { display: grid; }
+}
+
+// Flex utilities
+.flex {
+  &-row { flex-direction: row; }
+  &-column { flex-direction: column; }
+  &-wrap { flex-wrap: wrap; }
+  &-nowrap { flex-wrap: nowrap; }
+  &-grow-0 { flex-grow: 0; }
+  &-grow-1 { flex-grow: 1; }
+  &-shrink-0 { flex-shrink: 0; }
+  &-shrink-1 { flex-shrink: 1; }
+}
+
+// Text alignment
+.text {
+  &-left { text-align: left; }
+  &-center { text-align: center; }
+  &-right { text-align: right; }
+  &-justify { text-align: justify; }
+}
+
+// Font weight
+.fw {
+  &-light { font-weight: var(--font-weight-light); }
+  &-normal { font-weight: var(--font-weight-normal); }
+  &-medium { font-weight: var(--font-weight-medium); }
+  &-semibold { font-weight: var(--font-weight-semibold); }
+  &-bold { font-weight: var(--font-weight-bold); }
+}
+
+// Position
+.position {
+  &-relative { position: relative; }
+  &-absolute { position: absolute; }
+  &-fixed { position: fixed; }
+  &-sticky { position: sticky; }
+}
+
+// Overflow
+.overflow {
+  &-auto { overflow: auto; }
+  &-hidden { overflow: hidden; }
+  &-scroll { overflow: scroll; }
+  &-visible { overflow: visible; }
+}
+
+// Width and height
+.w {
+  &-100 { width: 100%; }
+  &-75 { width: 75%; }
+  &-50 { width: 50%; }
+  &-25 { width: 25%; }
+  &-auto { width: auto; }
+}
+
+.h {
+  &-100 { height: 100%; }
+  &-75 { height: 75%; }
+  &-50 { height: 50%; }
+  &-25 { height: 25%; }
+  &-auto { height: auto; }
+} 

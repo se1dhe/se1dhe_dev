@@ -50,7 +50,7 @@ class UserActivity(Base):
     timestamp = Column(DateTime(timezone=True), server_default=func.now(), index=True)
     
     # Relationships
-    user = relationship("User", back_populates="activities")
+    user = relationship("User", back_populates="user_activities")
     bot = relationship("Bot", back_populates="user_activities")
     
     def __repr__(self):

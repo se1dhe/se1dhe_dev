@@ -46,6 +46,8 @@ class User(Base):
     notifications = relationship("Notification", back_populates="user")
     bug_reports = relationship("BugReport", back_populates="user")
     feature_requests = relationship("FeatureRequest", back_populates="user")
+    feature_votes = relationship("FeatureVote", back_populates="user")
+    feature_comments = relationship("FeatureComment", back_populates="user")
     user_activities = relationship("UserActivity", back_populates="user")
     
     def __repr__(self):

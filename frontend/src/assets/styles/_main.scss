@@ -1,0 +1,65 @@
+// Import all styles
+@use 'reset';
+@use 'variables';
+@use 'base';
+@use 'layout';
+@use 'components';
+@use 'utilities';
+@use 'animations';
+@use 'themes';
+@use 'media';
+
+// Element Plus overrides
+.el-menu {
+  border-right: none !important;
+}
+
+.el-menu-item {
+  &.is-active {
+    background-color: var(--el-menu-hover-bg-color) !important;
+  }
+}
+
+.el-button {
+  &--primary {
+    --el-button-bg-color: var(--primary-color);
+    --el-button-border-color: var(--primary-color);
+    --el-button-hover-bg-color: var(--primary-color);
+    --el-button-hover-border-color: var(--primary-color);
+    opacity: 0.9;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.el-input {
+  --el-input-border-color: var(--border-color-base);
+  --el-input-hover-border-color: var(--primary-color);
+  --el-input-focus-border-color: var(--primary-color);
+}
+
+.el-card {
+  --el-card-border-color: var(--border-color-light);
+  --el-card-border-radius: var(--border-radius-base);
+}
+
+// Custom scrollbar
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-color-lighter);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color-base);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-color-light);
+} 

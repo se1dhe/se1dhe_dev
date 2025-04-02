@@ -120,4 +120,15 @@ from .token import (
     Token,
     TokenPayload,
     TokenData,
-) 
+)
+
+from .auth import LoginRequest
+
+__all__ = [
+    "Token",
+    "TokenPayload",
+    "User",
+    "UserCreate",
+    "UserUpdate",
+    "LoginRequest"
+] 

@@ -6,12 +6,19 @@ from app.services.telegram_auth import telegram_auth_service
 
 class TelegramBotService:
     def __init__(self):
-        self.bot = Bot(token=settings.TELEGRAM_BOT_TOKEN)
-        self.dp = Dispatcher()
-        self._setup_handlers()
+        if settings.TELEGRAM_BOT_ENABLED:
+            self.bot = Bot(token=settings.TELEGRAM_BOT_TOKEN)
+            self.dp = Dispatcher()
+            self._setup_handlers()
+        else:
+            self.bot = None
+            self.dp = None
     
     def _setup_handlers(self):
         """Настройка обработчиков команд и сообщений"""
+        if not self.dp:
+            return
+
         # Команда /start
         @self.dp.message(Command("start"))
         async def cmd_start(message: Message):
@@ -40,6 +47,10 @@ class TelegramBotService:
     
     async def start(self):
         """Запуск бота в режиме longpolling"""
+        if not settings.TELEGRAM_BOT_ENABLED:
+            print("Telegram bot is disabled")
+            return
+
         try:
             await self.dp.start_polling(
                 self.bot,
@@ -47,7 +58,8 @@ class TelegramBotService:
                 polling_timeout=settings.TELEGRAM_POLLING_TIMEOUT
             )
         finally:
-            await self.bot.session.close()
+            if self.bot:
+                await self.bot.session.close()
 
 # Создаем экземпляр сервиса
 telegram_bot_service = TelegramBotService() 

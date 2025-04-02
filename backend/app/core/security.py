@@ -4,12 +4,13 @@ from typing import Any, Union, Optional
 from jose import jwt
 from passlib.context import CryptContext
 from pydantic import ValidationError
+import bcrypt
 
 from app.core.config import settings
 from app.schemas.token import TokenPayload
 
 
-# Контекст для хеширования паролей
+# Создаем контекст для хеширования паролей
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
@@ -51,7 +52,10 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
     Returns:
         bool: True если пароль верен, иначе False
     """
-    return pwd_context.verify(plain_password, hashed_password)
+    # Если хеш начинается с b$, заменяем на $2b$
+    if hashed_password.startswith('b$'):
+        hashed_password = '$2b$' + hashed_password[2:]
+    return bcrypt.checkpw(plain_password.encode(), hashed_password.encode())
 
 
 def get_password_hash(password: str) -> str:
@@ -64,7 +68,8 @@ def get_password_hash(password: str) -> str:
     Returns:
         str: Хешированный пароль
     """
-    return pwd_context.hash(password)
+    # Генерируем хеш с правильным префиксом $2b$
+    return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
 
 
 def decode_token(token: str) -> Optional[TokenPayload]:

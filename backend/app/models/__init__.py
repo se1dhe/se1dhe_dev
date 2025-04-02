@@ -11,6 +11,7 @@ from app.models.feature_request import FeatureRequest, FeatureVote  # noqa
 from app.models.review import Review  # noqa
 from app.models.notification import Notification  # noqa
 from app.models.metric import Metric, BotAnalytics, UserActivity  # noqa
+from app.models.subscription import Subscription  # noqa
 
 __all__ = [
     "Base",
@@ -26,5 +27,6 @@ __all__ = [
     "Notification",
     "Metric",
     "BotAnalytics",
-    "UserActivity"
+    "UserActivity",
+    "Subscription"
 ] 

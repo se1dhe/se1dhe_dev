@@ -1,0 +1,178 @@
+// Light theme (default)
+:root {
+  // Colors
+  --primary-color: #409eff;
+  --success-color: #67c23a;
+  --warning-color: #e6a23c;
+  --danger-color: #f56c6c;
+  --info-color: #909399;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+  --text-color-dark: #212529;
+  --text-color-light: #6c757d;
+  --text-color-lighter: #adb5bd;
+  --text-color-lightest: #dee2e6;
+
+  // Background colors
+  --background-color: #ffffff;
+  --background-color-light: #f5f7fa;
+  --background-color-lighter: #fafafa;
+  --bg-color: #ffffff;
+  --bg-color-dark: #f8f9fa;
+  --bg-color-darker: #e9ecef;
+  --bg-color-darkest: #dee2e6;
+
+  // Text colors
+  --text-color-primary: #303133;
+  --text-color-regular: #606266;
+  --text-color-secondary: #909399;
+  --text-color-placeholder: #c0c4cc;
+  --text-color: #212529;
+
+  // Border colors
+  --border-color-base: #dcdfe6;
+  --border-color-light: #e4e7ed;
+  --border-color-lighter: #ebeef5;
+  --border-color-extra-light: #f2f6fc;
+  --border-color: #dee2e6;
+  --border-color-dark: #ced4da;
+  --border-color-darker: #adb5bd;
+  --border-color-darkest: #6c757d;
+
+  // Font sizes
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 3rem;
+  --font-size-4xl: 4rem;
+
+  // Font weights
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  // Line heights
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  --line-height-loose: 2;
+
+  // Spacing
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+
+  // Border radius
+  --border-radius-sm: 0.25rem;
+  --border-radius-base: 4px;
+  --border-radius-md: 0.5rem;
+  --border-radius-lg: 1rem;
+  --border-radius-full: 9999px;
+  --border-radius-circle: 50%;
+
+  // Shadows
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --box-shadow-base: 0 2px 4px rgba(0, 0, 0, 0.12);
+
+  // Transitions
+  --transition-duration: 0.3s;
+  --transition-timing-function: ease;
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 350ms ease;
+  --transition-slower: 500ms ease;
+
+  // Z-index
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1020;
+  --z-index-fixed: 1030;
+  --z-index-modal-backdrop: 1040;
+  --z-index-modal: 1050;
+  --z-index-popover: 1060;
+  --z-index-tooltip: 1070;
+
+  // Form controls
+  --input-height: 2.5rem;
+  --input-padding-y: 0.5rem;
+  --input-padding-x: 0.75rem;
+  --input-border-width: 1px;
+  --input-border-radius: var(--border-radius-md);
+  --input-focus-border-color: var(--primary-color);
+  --input-focus-box-shadow: 0 0 0 0.2rem rgba(64, 158, 255, 0.25);
+
+  // Cards
+  --card-border-width: 1px;
+  --card-border-color: var(--border-color);
+  --card-border-radius: var(--border-radius-lg);
+  --card-spacing: var(--spacing-lg);
+  --card-shadow: var(--shadow-md);
+
+  // Tables
+  --table-cell-padding: var(--spacing-md);
+  --table-border-color: var(--border-color);
+  --table-striped-bg: var(--bg-color-dark);
+  --table-hover-bg: var(--bg-color-darker);
+}
+
+// Dark theme
+.dark {
+  // Colors
+  --primary-color: #409eff;
+  --success-color: #67c23a;
+  --warning-color: #e6a23c;
+  --danger-color: #f56c6c;
+  --info-color: #909399;
+  --light-color: #2c2c2c;
+  --dark-color: #1a1a1a;
+  --text-color-dark: #ffffff;
+  --text-color-light: #e0e0e0;
+  --text-color-lighter: #909399;
+  --text-color-lightest: #6c6c6c;
+
+  // Background colors
+  --background-color: #1a1a1a;
+  --background-color-light: #2c2c2c;
+  --background-color-lighter: #363636;
+  --bg-color: #1a1a1a;
+  --bg-color-dark: #2c2c2c;
+  --bg-color-darker: #363636;
+  --bg-color-darkest: #434343;
+
+  // Text colors
+  --text-color-primary: #ffffff;
+  --text-color-regular: #e0e0e0;
+  --text-color-secondary: #909399;
+  --text-color-placeholder: #6c6c6c;
+  --text-color: #ffffff;
+
+  // Border colors
+  --border-color-base: #434343;
+  --border-color-light: #4c4c4c;
+  --border-color-lighter: #545454;
+  --border-color-extra-light: #5c5c5c;
+  --border-color: #434343;
+  --border-color-dark: #4c4c4c;
+  --border-color-darker: #545454;
+  --border-color-darkest: #6c6c6c;
+
+  // Element Plus overrides
+  --el-bg-color: var(--background-color);
+  --el-bg-color-page: var(--background-color);
+  --el-text-color-primary: var(--text-color-primary);
+  --el-text-color-regular: var(--text-color-regular);
+  --el-border-color: var(--border-color-base);
+  --el-border-color-light: var(--border-color-light);
+  --el-fill-color-blank: var(--background-color);
+} 
