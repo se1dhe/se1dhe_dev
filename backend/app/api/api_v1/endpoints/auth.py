@@ -69,13 +69,23 @@ async def login(
 
 
 @router.get("/me", response_model=schemas.User)
-async def get_current_user(
-    current_user: schemas.User = Depends(deps.get_current_user)
+async def read_users_me(
+    current_user: schemas.User = Depends(deps.get_current_user),
 ) -> Any:
     """
     Get current user.
     """
     return current_user
+
+
+@router.post("/logout")
+async def logout(
+    current_user: schemas.User = Depends(deps.get_current_user),
+) -> Any:
+    """
+    Logout current user.
+    """
+    return {"message": "Successfully logged out"}
 
 
 @router.post("/register", response_model=schemas.User)

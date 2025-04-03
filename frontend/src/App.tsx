@@ -4,8 +4,9 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { theme } from './theme/theme';
 import Login from './pages/Login';
-import UserDashboard from './pages/UserDashboard';
-import AdminDashboard from './pages/AdminDashboard';
+import Dashboard from './pages/Dashboard';
+import Bots from './pages/Bots';
+import Users from './pages/Users';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 
 const AppRoutes: React.FC = () => {
@@ -17,11 +18,13 @@ const AppRoutes: React.FC = () => {
         isAuthenticated ? <Navigate to="/dashboard" /> : <Login />
       } />
       <Route path="/dashboard" element={
-        isAuthenticated ? (
-          isAdmin ? <AdminDashboard /> : <UserDashboard />
-        ) : (
-          <Navigate to="/login" />
-        )
+        isAuthenticated ? <Dashboard /> : <Navigate to="/login" />
+      } />
+      <Route path="/bots" element={
+        isAuthenticated ? <Bots /> : <Navigate to="/login" />
+      } />
+      <Route path="/users" element={
+        isAuthenticated && isAdmin ? <Users /> : <Navigate to="/login" />
       } />
       <Route path="/" element={<Navigate to="/dashboard" />} />
     </Routes>

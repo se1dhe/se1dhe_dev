@@ -24,47 +24,143 @@ export const theme = createTheme({
   },
   typography: {
     fontFamily: '"Fira Code", "Consolas", "Monaco", monospace',
+    fontSize: 14,
     h1: {
-      fontSize: '2.5rem',
-      fontWeight: 600,
-      letterSpacing: '0.02em',
-    },
-    h2: {
       fontSize: '2rem',
       fontWeight: 600,
       letterSpacing: '0.02em',
     },
-    h3: {
+    h2: {
       fontSize: '1.75rem',
       fontWeight: 600,
       letterSpacing: '0.02em',
     },
-    body1: {
+    h3: {
+      fontSize: '1.5rem',
+      fontWeight: 600,
+      letterSpacing: '0.02em',
+    },
+    h4: {
+      fontSize: '1.3rem',
+      fontWeight: 600,
+    },
+    h5: {
+      fontSize: '1.1rem',
+      fontWeight: 600,
+    },
+    h6: {
       fontSize: '1rem',
-      lineHeight: 1.7,
+      fontWeight: 600,
+    },
+    body1: {
+      fontSize: '0.95rem',
+      lineHeight: 1.6,
+    },
+    body2: {
+      fontSize: '0.875rem',
+      lineHeight: 1.5,
     },
     button: {
       textTransform: 'none',
       fontWeight: 500,
+      fontSize: '0.875rem',
+    },
+    caption: {
+      fontSize: '0.8rem',
     },
   },
   shape: {
-    borderRadius: 8,
+    borderRadius: 6,
   },
+  spacing: 8,
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 8,
-          padding: '8px 24px',
+          borderRadius: 6,
+          padding: '6px 16px',
         },
+        sizeSmall: {
+          padding: '4px 10px',
+          fontSize: '0.8rem',
+        },
+      },
+      defaultProps: {
+        size: 'small',
       },
     },
     MuiPaper: {
       styleOverrides: {
         root: {
           backgroundImage: 'none',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
+          boxShadow: '0 3px 10px rgba(0, 0, 0, 0.2)',
+        },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          padding: '8px 16px',
+          fontSize: '0.875rem',
+        },
+        sizeSmall: {
+          padding: '6px 12px',
+          fontSize: '0.8rem',
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          padding: 8,
+        },
+        sizeSmall: {
+          padding: 4,
+        },
+      },
+      defaultProps: {
+        size: 'small',
+      },
+    },
+    MuiSvgIcon: {
+      defaultProps: {
+        fontSize: 'small',
+      },
+      styleOverrides: {
+        fontSizeSmall: {
+          fontSize: '1.25rem',
+        },
+      },
+    },
+    MuiToolbar: {
+      styleOverrides: {
+        dense: {
+          minHeight: 48,
+        },
+      },
+    },
+    MuiListItem: {
+      styleOverrides: {
+        dense: {
+          paddingTop: 4,
+          paddingBottom: 4,
+        },
+      },
+    },
+    MuiCardHeader: {
+      styleOverrides: {
+        root: {
+          padding: '12px 16px',
+        },
+      },
+    },
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+          padding: '12px 16px',
+          '&:last-child': {
+            paddingBottom: '12px',
+          },
         },
       },
     },

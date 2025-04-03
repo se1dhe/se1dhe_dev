@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
 interface User {
   id: number;
@@ -17,6 +18,21 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// Создаем экземпляр axios с базовым URL
+const api = axios.create({
+  baseURL: 'http://localhost:8000/api/v1',
+  withCredentials: true,
+});
+
+// Добавляем интерцептор для автоматического добавления токена
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
@@ -29,16 +45,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    // TODO: Check for existing session/token
     const checkAuth = async () => {
       try {
-        // const response = await fetch('/api/auth/check');
-        // const data = await response.json();
-        // if (data.user) {
-        //   setUser(data.user);
-        // }
+        const token = localStorage.getItem('token');
+        if (token) {
+          const response = await api.get('/auth/me');
+          if (response.data) {
+            setUser(response.data);
+          }
+        }
       } catch (error) {
         console.error('Auth check failed:', error);
+        localStorage.removeItem('token');
       }
     };
 
@@ -47,35 +65,30 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (email: string, password: string) => {
     try {
-      // TODO: Implement actual API call
-      // const response = await fetch('/api/auth/login', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ email, password }),
-      // });
-      // const data = await response.json();
-      // if (data.user) {
-      //   setUser(data.user);
-      // } else {
-      //   throw new Error(data.message || 'Login failed');
-      // }
-
-      // Temporary mock login
-      setUser({
-        id: 1,
-        name: 'John Doe',
-        email: email,
-        role: email.includes('admin') ? 'admin' : 'user',
-      });
+      const response = await api.post('/auth/login', { email, password });
+      const { access_token } = response.data;
+      
+      // Сохраняем токен
+      localStorage.setItem('token', access_token);
+      
+      // Получаем информацию о пользователе
+      const userResponse = await api.get('/auth/me');
+      setUser(userResponse.data);
     } catch (error) {
       console.error('Login failed:', error);
       throw error;
     }
   };
 
-  const logout = () => {
-    // TODO: Implement actual logout API call
-    setUser(null);
+  const logout = async () => {
+    try {
+      await api.post('/auth/logout');
+    } catch (error) {
+      console.error('Logout failed:', error);
+    } finally {
+      localStorage.removeItem('token');
+      setUser(null);
+    }
   };
 
   const value = {
