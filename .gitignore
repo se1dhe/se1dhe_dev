@@ -19,6 +19,88 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Logs
+logs/
+*.log
+
+# Build
+dist/
+build/
+coverage/
+.next/
+out/
+
+# Database
+*.sqlite3
+*.db
+*.sql
+*.sqlite
+*.mysql
+*.mysql-*
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+.nox/
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Misc
+*.bak
+*.tmp
+*.temp
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # Virtual Environment
 venv/
@@ -40,25 +122,21 @@ ENV/
 *.log
 logs/
 
-# Database
-*.sqlite3
+# MySQL
+*.mysql
+*.sql
+*.sqlite
 *.db
+mysql_data/
+mysql_logs/
 
-# OS
-.DS_Store
-Thumbs.db
-
-# Vue.js
-node_modules
-/dist
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# Testing
-/coverage
-.pytest_cache/
+# Telegram Bot
+bot/config.py
+bot/token.txt
+bot/*.session
+bot/*.session-journal
+bot/logs/
+bot/data/
 
 # Alembic
 alembic/versions/*.py
