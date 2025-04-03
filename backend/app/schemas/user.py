@@ -39,7 +39,7 @@ class UserInDBBase(UserBase):
     """Schema for user data retrieved from DB with read-only fields."""
     id: int
     created_at: datetime
-    updated_at: datetime
+    updated_at: Optional[datetime] = None
     
     class Config:
         from_attributes = True

@@ -1,10 +1,11 @@
 #!/bin/bash
 
-# Запуск бэкенда
-cd backend && python run.py &
+# Get the directory where the script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# Запуск фронтенда
-cd ../frontend && npm run dev &
+# Activate virtual environment
+source "$SCRIPT_DIR/venv/bin/activate"
 
-# Ожидание завершения всех процессов
-wait 
+# Start backend server
+cd "$SCRIPT_DIR/backend"
+python run.py 
