@@ -1,0 +1,51 @@
+{
+  "nav": {
+    "home": "Home",
+    "catalog": "Catalog",
+    "dashboard": "Dashboard",
+    "login": "Login",
+    "logout": "Logout",
+    "language": "Language"
+  },
+  "footer": {
+    "about": "About Us",
+    "description": "Platform for selling Telegram bots with a convenient interface and reliable payment system.",
+    "contact": "Contact",
+    "social": "Social Media",
+    "rights": "All rights reserved"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Submit",
+    "forgot_password": "Forgot password?",
+    "no_account": "No account?",
+    "have_account": "Already have an account?"
+  },
+  "catalog": {
+    "title": "Bot Catalog",
+    "search": "Search...",
+    "categories": "Categories",
+    "price": "Price",
+    "buy": "Buy",
+    "details": "Details",
+    "no_results": "No results found"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "balance": "Balance",
+    "purchases": "My Purchases",
+    "settings": "Settings",
+    "support": "Support"
+  },
+  "errors": {
+    "required": "Required field",
+    "invalid_email": "Invalid email format",
+    "min_length": "Minimum length: {length}",
+    "max_length": "Maximum length: {length}",
+    "server_error": "Server error",
+    "network_error": "Network error"
+  }
+} 

@@ -1,0 +1,51 @@
+{
+  "nav": {
+    "home": "Главная",
+    "catalog": "Каталог",
+    "dashboard": "Личный кабинет",
+    "login": "Войти",
+    "logout": "Выйти",
+    "language": "Язык"
+  },
+  "footer": {
+    "about": "О нас",
+    "description": "Платформа для продажи Telegram ботов с удобным интерфейсом и надежной системой оплаты.",
+    "contact": "Контакты",
+    "social": "Социальные сети",
+    "rights": "Все права защищены"
+  },
+  "auth": {
+    "login": "Вход",
+    "register": "Регистрация",
+    "email": "Email",
+    "password": "Пароль",
+    "submit": "Отправить",
+    "forgot_password": "Забыли пароль?",
+    "no_account": "Нет аккаунта?",
+    "have_account": "Уже есть аккаунт?"
+  },
+  "catalog": {
+    "title": "Каталог ботов",
+    "search": "Поиск...",
+    "categories": "Категории",
+    "price": "Цена",
+    "buy": "Купить",
+    "details": "Подробнее",
+    "no_results": "Ничего не найдено"
+  },
+  "dashboard": {
+    "title": "Личный кабинет",
+    "balance": "Баланс",
+    "purchases": "Мои покупки",
+    "settings": "Настройки",
+    "support": "Поддержка"
+  },
+  "errors": {
+    "required": "Обязательное поле",
+    "invalid_email": "Неверный формат email",
+    "min_length": "Минимальная длина: {length}",
+    "max_length": "Максимальная длина: {length}",
+    "server_error": "Ошибка сервера",
+    "network_error": "Ошибка сети"
+  }
+} 

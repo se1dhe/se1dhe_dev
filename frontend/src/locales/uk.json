@@ -1,0 +1,51 @@
+{
+  "nav": {
+    "home": "Головна",
+    "catalog": "Каталог",
+    "dashboard": "Особистий кабінет",
+    "login": "Увійти",
+    "logout": "Вийти",
+    "language": "Мова"
+  },
+  "footer": {
+    "about": "Про нас",
+    "description": "Платформа для продажу Telegram ботів з зручним інтерфейсом та надійною системою оплати.",
+    "contact": "Контакти",
+    "social": "Соціальні мережі",
+    "rights": "Всі права захищені"
+  },
+  "auth": {
+    "login": "Вхід",
+    "register": "Реєстрація",
+    "email": "Email",
+    "password": "Пароль",
+    "submit": "Відправити",
+    "forgot_password": "Забули пароль?",
+    "no_account": "Немає акаунту?",
+    "have_account": "Вже є акаунт?"
+  },
+  "catalog": {
+    "title": "Каталог ботів",
+    "search": "Пошук...",
+    "categories": "Категорії",
+    "price": "Ціна",
+    "buy": "Купити",
+    "details": "Детальніше",
+    "no_results": "Нічого не знайдено"
+  },
+  "dashboard": {
+    "title": "Особистий кабінет",
+    "balance": "Баланс",
+    "purchases": "Мої покупки",
+    "settings": "Налаштування",
+    "support": "Підтримка"
+  },
+  "errors": {
+    "required": "Обов'язкове поле",
+    "invalid_email": "Невірний формат email",
+    "min_length": "Мінімальна довжина: {length}",
+    "max_length": "Максимальна довжина: {length}",
+    "server_error": "Помилка сервера",
+    "network_error": "Помилка мережі"
+  }
+} 
